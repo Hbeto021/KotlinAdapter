@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KotlinAdapter</string>
+    <string name="text_view_dialog_cancel">Cancel</string>
+    <string name="text_view_dialog_submit">Submit</string>
+    <string name="text_input_sub_title_hint">Subtitle</string>
+    <string name="text_input_title_hint">Title</string>
+</resources>
