@@ -4,9 +4,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-class RecyclerViewAdapter(var onClickInterface : OnClickInterface) : RecyclerView.Adapter<RecyclerViewAdapterViewHolder>(){
+class RecyclerViewAdapter(
+    private val list: ArrayList<AnyObject>
+) : RecyclerView.Adapter<RecyclerViewAdapterViewHolder>() {
 
-    private val list = ArrayList<AnyObject>()
+     var listener: OnClickInterface? = null
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): RecyclerViewAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
@@ -17,15 +21,24 @@ class RecyclerViewAdapter(var onClickInterface : OnClickInterface) : RecyclerVie
         return list.size
     }
 
-    fun addItens(list : ArrayList<AnyObject>){
+    fun add(vararg items: AnyObject) {
+        this.list.addAll(items)
+        notifyDataSetChanged()
+    }
+
+    fun clear() {
         this.list.clear()
-        this.list.addAll(list)
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerViewAdapterViewHolder, position: Int) {
-        viewHolder.bindView(list[position])
-        viewHolder.onClickItem(position, onClickInterface)
+        val anyObject = list[position]
+        viewHolder.bindView(anyObject)
+        viewHolder.itemView.setOnClickListener{
+            listener?.onClickItem(position)
+        }
+
+
     }
 
     interface OnClickInterface {
