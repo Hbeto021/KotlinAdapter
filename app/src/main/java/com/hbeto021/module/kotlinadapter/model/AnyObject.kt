@@ -1,8 +1,8 @@
-package com.hbeto021.module.kotlinadapter
+package com.hbeto021.module.kotlinadapter.model
 
 data class AnyObject (
     val title : String,
     val subTitle : String
 )
 
-fun AnyObject.isValidObject(): Boolean = title.isNotEmpty() && subTitle.isNotEmpty()
+fun AnyObject.isValidObject(): Boolean = title.trim().isNotEmpty() && subTitle.trim().isNotEmpty()
